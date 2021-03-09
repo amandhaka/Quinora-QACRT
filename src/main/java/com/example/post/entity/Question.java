@@ -3,13 +3,16 @@ package com.example.post.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.ws.rs.DefaultValue;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 
 @Data
 @Entity(name = "question")
@@ -32,14 +35,11 @@ public class Question {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-
-    @OneToMany
-    List<Category> categoryList;
-
-    @OneToMany
-    List<Answer> answersList;
-
     private String username;
+    private String category;
 
-    private Boolean status;
+    @Column(columnDefinition = "boolean default true")
+    @NotNull
+    private boolean status;
+
 }

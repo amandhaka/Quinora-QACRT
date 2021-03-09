@@ -3,12 +3,14 @@ package com.example.post.dto;
 import com.example.post.entity.Category;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Date;
+import java.util.HashSet;
 
 @Data
 public class QuestionRequestDto {
     private String questionTitle;
     private String questionText;
-    private List<Category> categoryList;
+    private Date createdAt;
     private String username;
+    private String category;
 }

@@ -2,13 +2,14 @@ package com.example.post.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
+import java.util.Set;
 
-@Entity
+@Entity(name = "category")
 @Data
 public class Category {
     @Id
@@ -18,6 +19,5 @@ public class Category {
 
     @NotBlank
     private String categoryName;
-
 
 }

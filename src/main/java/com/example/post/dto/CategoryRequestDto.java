@@ -6,8 +6,7 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class CategoryResponseDto {
-
+public class CategoryRequestDto {
     private Long categoryId;
     private String categoryName;
 }

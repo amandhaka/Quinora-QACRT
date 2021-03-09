@@ -1,5 +1,7 @@
 package com.example.post.controller;
 
+import com.example.post.dto.CategoryRequestDto;
+import com.example.post.dto.CategoryResponseDto;
 import com.example.post.dto.QuestionRequestDto;
 import com.example.post.dto.QuestionResponseDto;
 import com.example.post.service.QuestionService;
@@ -23,7 +25,7 @@ public class QuestionController {
 
     @CrossOrigin
     @PostMapping("/{username}/add")
-    QuestionResponseDto createQuestion(@PathVariable("username") String username, @RequestBody QuestionRequestDto questionRequestDto) {
+    QuestionResponseDto createQuestion(@PathVariable("username") String username, @RequestBody QuestionRequestDto questionRequestDto) throws Exception {
         return questionService.createQuestion(username, questionRequestDto);
     }
 
@@ -34,9 +36,9 @@ public class QuestionController {
     }
 
     @CrossOrigin
-    @GetMapping("/{categoryId}")
-    List<QuestionResponseDto> questionListByCategory(@PathVariable("categoryId") Long categoryId) {
-        return questionService.questionListByCategory(categoryId);
+    @GetMapping("/{category}")
+    List<QuestionResponseDto> questionListByCategory(@PathVariable("category") String category) {
+        return questionService.questionListByCategory(category);
     }
 
     @CrossOrigin

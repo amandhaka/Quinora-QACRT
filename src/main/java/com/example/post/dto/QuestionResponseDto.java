@@ -4,7 +4,7 @@ import com.example.post.entity.Category;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 
 @Data
 public class QuestionResponseDto {
@@ -13,6 +13,7 @@ public class QuestionResponseDto {
     private String questionTitle;
     private String questionText;
     private Date createdAt;
-    private List<Category> categoryList;
     private String username;
+    private String category;
+    private boolean status;
 }
