@@ -22,7 +22,7 @@ public class commentController {
     }
 
     @PostMapping("/postComment/{userName}")
-    public commentResponseDTO postCommentByUserName(@RequestBody postCommentRequestDTO postCommentRequestDTO, @PathVariable("userName") String userName) {
+    public commentResponseDTO postCommentByUserName(@RequestBody postCommentRequestDTO postCommentRequestDTO, @PathVariable("userName") String userName) throws Exception {
         return commentService.postCommentByUserName(postCommentRequestDTO, userName);
     }
 

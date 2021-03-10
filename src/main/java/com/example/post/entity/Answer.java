@@ -1,12 +1,11 @@
 package com.example.post.entity;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,14 +15,18 @@ public class Answer {
     @GeneratedValue(generator = "answer_id_seq", strategy = GenerationType.AUTO)
     private Long answerId;
 
+    @NotNull
     private Long questionId;
+
+    @NotNull
     private String userName;
     private String text;
     private boolean status;
     private String timeStamp;
 
-//    @OneToMany
-//    private List<Comment> commentList;
+//    @OneToMany(cascade = CascadeType.ALL)
 //    @JoinColumn(referencedColumnName = "answerId", name = "answerId")
+    private List<Comment> commentList;
+
 
 }
