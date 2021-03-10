@@ -1,9 +1,6 @@
 package com.example.post.controller;
 
-import com.example.post.dto.CategoryRequestDto;
-import com.example.post.dto.CategoryResponseDto;
-import com.example.post.dto.QuestionRequestDto;
-import com.example.post.dto.QuestionResponseDto;
+import com.example.post.dto.*;
 import com.example.post.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -58,5 +55,6 @@ public class QuestionController {
     QuestionResponseDto disableQuestionById(@PathVariable("username") String username, @PathVariable("questionId") Long questionId) {
         return questionService.disableQuestionById(username, questionId);
     }
+
 
 }

@@ -49,6 +49,7 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionResponseDto questionResponseDto = new QuestionResponseDto();
         Question question = new Question();
         BeanUtils.copyProperties(questionRequestDto, question);
+        question.setUsername(username);
         Question savedQuestion = questionRepository.save(question);
         BeanUtils.copyProperties(savedQuestion, questionResponseDto);
         return questionResponseDto;

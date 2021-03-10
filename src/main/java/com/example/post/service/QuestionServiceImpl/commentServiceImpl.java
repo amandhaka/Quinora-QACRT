@@ -1,4 +1,4 @@
-package com.example.post.service.impl;
+package com.example.post.service.QuestionServiceImpl;
 
 import com.example.post.dto.commentResponseDTO;
 import com.example.post.dto.deleteCommentRequestDTO;
