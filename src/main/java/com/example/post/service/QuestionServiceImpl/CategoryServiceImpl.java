@@ -1,8 +1,11 @@
 package com.example.post.service.QuestionServiceImpl;
 
 import ch.qos.logback.core.joran.util.beans.BeanUtil;
+import com.example.post.dto.CategoryRequestDto;
 import com.example.post.dto.CategoryResponseDto;
+import com.example.post.dto.QuestionResponseDto;
 import com.example.post.entity.Category;
+import com.example.post.entity.Question;
 import com.example.post.repository.CategoryRepository;
 import com.example.post.service.CategoryService;
 import org.springframework.beans.BeanUtils;
@@ -26,5 +29,15 @@ public class CategoryServiceImpl implements CategoryService {
             categoryResponseDtoList.add(categoryResponseDto);
         }
         return categoryResponseDtoList;
+    }
+//
+    @Override
+    public CategoryResponseDto createCategory(CategoryRequestDto categoryRequestDto) {
+        CategoryResponseDto categoryResponseDto= new CategoryResponseDto();
+        Category category = new Category();
+        BeanUtils.copyProperties(categoryRequestDto, category);
+        Category savedCategory = categoryRepository.save(category);
+        BeanUtils.copyProperties(savedCategory, categoryResponseDto);
+        return categoryResponseDto;
     }
 }

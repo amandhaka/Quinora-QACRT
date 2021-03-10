@@ -4,19 +4,20 @@ package com.example.post.entity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Data
-@Entity(name = "question")
+@Document(collection = "question")
 public class Question {
-    @Id
-    @GenericGenerator(name = "question_id_seq", strategy = "increment")
-    @GeneratedValue(generator = "question_id_seq", strategy = GenerationType.AUTO)
+    @MongoId
     private Long questionId;
 
     @NotBlank
@@ -33,7 +34,7 @@ public class Question {
     private Date createdAt;
 
     private String username;
-    private String category;
+    private List<Category> categoryList;
 
     @Column(columnDefinition = "boolean default true")
     @NotNull

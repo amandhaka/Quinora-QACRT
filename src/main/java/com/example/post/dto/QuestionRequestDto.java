@@ -5,12 +5,13 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 @Data
 public class QuestionRequestDto {
     private String questionTitle;
     private String questionText;
     private Date createdAt;
-    private String category;
     private boolean status;
+    private List<Category> categoryList;
 }
