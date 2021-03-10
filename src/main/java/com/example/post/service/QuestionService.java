@@ -26,3 +26,4 @@ public interface QuestionService {
 
     QuestionResponseDto disableQuestionById(String username, Long questionId);
 }
+

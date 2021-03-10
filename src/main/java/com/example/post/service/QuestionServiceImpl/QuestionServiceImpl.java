@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutorService;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -65,7 +64,6 @@ public class QuestionServiceImpl implements QuestionService {
             Question question = optionalQuestion.get();
             question.setQuestionTitle(questionRequestDto.getQuestionTitle());
             question.setQuestionText(questionRequestDto.getQuestionText());
-            question.setUsername(questionRequestDto.getUsername());
             question.setCategory(questionRequestDto.getCategory());;
             BeanUtils.copyProperties(question, questionResponseDto);
             questionRepository.save(question);

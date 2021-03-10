@@ -11,6 +11,6 @@ public class QuestionRequestDto {
     private String questionTitle;
     private String questionText;
     private Date createdAt;
-    private String username;
     private String category;
+    private boolean status;
 }
