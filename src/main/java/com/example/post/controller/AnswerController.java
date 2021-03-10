@@ -3,6 +3,7 @@ package com.example.post.controller;
 import com.example.post.dto.AnswerRequestDTO;
 import com.example.post.dto.AnswerRequestIdDTO;
 import com.example.post.dto.AnswerResponseDTO;
+import com.example.post.dto.SortAnswerPostDTO;
 import com.example.post.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,5 +35,10 @@ public class AnswerController {
     @DeleteMapping( path = "{username}/{quid}")
     public String deleteAnswerFromUI(@PathVariable("quid") Long quid, @PathVariable("username") String username, @RequestBody AnswerRequestIdDTO request){
         return answerService.deleteAnswerFromUI(username, quid, request);
+    }
+
+    @PostMapping(path = "{username}/{qid}/sort")
+    public List<AnswerResponseDTO> showAnswersAfterSort (@PathVariable("qid") Long qid, @PathVariable("username") String username, @RequestBody SortAnswerPostDTO request){
+        return answerService.showAnswersAfterSort(username, qid, request) ;
     }
 }

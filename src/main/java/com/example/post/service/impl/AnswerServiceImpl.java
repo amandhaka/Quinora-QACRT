@@ -3,6 +3,7 @@ package com.example.post.service.impl;
 import com.example.post.dto.AnswerRequestDTO;
 import com.example.post.dto.AnswerRequestIdDTO;
 import com.example.post.dto.AnswerResponseDTO;
+import com.example.post.dto.SortAnswerPostDTO;
 import com.example.post.entity.Answer;
 import com.example.post.entity.Comment;
 import com.example.post.repository.AnswerRepository;
@@ -22,6 +23,9 @@ public class AnswerServiceImpl implements AnswerService {
     AnswerRepository answerRepository;
     @Autowired
     CommentRepository commentRepository;
+
+//    @Autowired
+//    ReactionRepository reactionRepository;
 
 //    @Autowired
 //    private MultimediaClient multimediaClient;
@@ -59,15 +63,15 @@ public class AnswerServiceImpl implements AnswerService {
             System.out.println(answerResponseDTO);
             List<Comment>comments = commentRepository.commentsOnAnswer(answer.getId());
             System.out.println(comments);
-//            answerResponseDTO.setLikes(Reac);
+//          answerResponseDTO.setLikes(reactionRepository.getLikesAndDislikes(answer.getId(), true));
+//          answerResponseDTO.setDislikes(reactionRepository.getLikesAndDislikes(answer.getId(), false));
             answerResponseDTO.setCommentList(comments);
-            System.out.println(answerResponseDTO);
             toReturn.add(answerResponseDTO);
 
         });
 
-            return toReturn;
 
+    return toReturn;
 
     }
 
@@ -99,6 +103,47 @@ public class AnswerServiceImpl implements AnswerService {
         }
 
         return null;
+
+    }
+
+    public List<AnswerResponseDTO> showAnswersAfterSort (String username, Long quid, SortAnswerPostDTO request){
+
+        List<AnswerResponseDTO> toReturn = new ArrayList<>();
+        List <Answer> listOfAnswersOnQuestion = answerRepository.answersOnQuestion(quid);
+        listOfAnswersOnQuestion.forEach(answer -> {
+            AnswerResponseDTO answerResponseDTO = new AnswerResponseDTO();
+            BeanUtils.copyProperties(answer, answerResponseDTO);
+            //answerResponseDTO.setImgsrc(multimediaClient.getPic());
+            System.out.println(answerResponseDTO);
+            List<Comment>comments = commentRepository.commentsOnAnswer(answer.getId());
+            System.out.println(comments);
+//          answerResponseDTO.setLikes(reactionRepository.getLikesAndDislikes(answer.getId(), true));
+//          answerResponseDTO.setDislikes(reactionRepository.getLikesAndDislikes(answer.getId(), false));
+            answerResponseDTO.setCommentList(comments);
+            toReturn.add(answerResponseDTO);
+
+        });
+
+
+        if (request.getParameter().equals("byLikes")){
+
+            Collections.sort(toReturn, (AnswerResponseDTO a1, AnswerResponseDTO a2) -> a1.getLikes().compareTo(a2.getLikes()));
+
+            }
+
+        else if (request.getParameter().equals("byDislikes")){
+
+            Collections.sort(toReturn, (AnswerResponseDTO a1, AnswerResponseDTO a2) -> a1.getDislikes().compareTo(a2.getDislikes()));
+
+        }
+
+        else if (request.getParameter().equals("byNew")){
+
+            Collections.reverse(toReturn);
+
+        }
+
+        return toReturn;
 
     }
 
