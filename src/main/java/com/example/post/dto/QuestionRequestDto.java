@@ -11,6 +11,7 @@ public class QuestionRequestDto {
     private String questionTitle;
     private String questionText;
     private Date createdAt;
-    private String category;
+  //  private String category;
     private boolean status;
+    private HashSet<Category> categorySet;
 }

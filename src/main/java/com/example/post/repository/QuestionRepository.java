@@ -17,5 +17,5 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     List<Question> findByUsername(String username);
 
-    List<Question> findByCategory(String category);
+   // List<Question> findByCategory(String category);
 }

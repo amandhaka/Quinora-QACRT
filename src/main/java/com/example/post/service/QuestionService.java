@@ -22,7 +22,7 @@ public interface QuestionService {
 
     QuestionResponseDto deleteQuestionById(String username, Long questionId);
 
-    List<QuestionResponseDto> questionListByCategory(String category);
+   // List<QuestionResponseDto> questionListByCategory(String category);
 
     QuestionResponseDto disableQuestionById(String username, Long questionId);
 }

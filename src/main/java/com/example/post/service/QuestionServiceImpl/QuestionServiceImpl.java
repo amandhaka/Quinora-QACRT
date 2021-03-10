@@ -13,9 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -46,6 +44,7 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionResponseDto createQuestion(String username, QuestionRequestDto questionRequestDto) throws Exception {
         List<String> categoryList = categoryRepository.findAllCategoryNames();
         if(!categoryList.contains(questionRequestDto.getCategory())) throw new Exception("Category Not Found");
+
         QuestionResponseDto questionResponseDto = new QuestionResponseDto();
         Question question = new Question();
         BeanUtils.copyProperties(questionRequestDto, question);
@@ -64,7 +63,7 @@ public class QuestionServiceImpl implements QuestionService {
             Question question = optionalQuestion.get();
             question.setQuestionTitle(questionRequestDto.getQuestionTitle());
             question.setQuestionText(questionRequestDto.getQuestionText());
-            question.setCategory(questionRequestDto.getCategory());;
+          //  question.setCategory(questionRequestDto.getCategory());;
             BeanUtils.copyProperties(question, questionResponseDto);
             questionRepository.save(question);
             return questionResponseDto;
@@ -72,20 +71,20 @@ public class QuestionServiceImpl implements QuestionService {
         return null;
     }
 
-    @Override
-    public List<QuestionResponseDto> questionListByCategory(String category) {
-        List<QuestionResponseDto> responseDtoList = new ArrayList<>();
-        List<Question> questionList = questionRepository.findByCategory(category);
-        if(!questionList.isEmpty()){
-            for(Question question: questionList) {
-                QuestionResponseDto questionResponseDto = new QuestionResponseDto();
-                BeanUtils.copyProperties(question, questionResponseDto);
-                responseDtoList.add(questionResponseDto);
-            }
-            return responseDtoList;
-        }
-        return null;
-    }
+//    @Override
+//    public List<QuestionResponseDto> questionListByCategory(String category) {
+//        List<QuestionResponseDto> responseDtoList = new ArrayList<>();
+//        List<Question> questionList = questionRepository.findByCategory(category);
+//        if(!questionList.isEmpty()){
+//            for(Question question: questionList) {
+//                QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+//                BeanUtils.copyProperties(question, questionResponseDto);
+//                responseDtoList.add(questionResponseDto);
+//            }
+//            return responseDtoList;
+//        }
+//        return null;
+//    }
 
     @Override
     public List<QuestionResponseDto> questionListByUsername(String username) {

@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "category")
@@ -19,5 +20,9 @@ public class Category {
 
     @NotBlank
     private String categoryName;
+
+    @ManyToMany(mappedBy = "categorySet")
+    private Set<Question> questionHashSet;
+
 
 }

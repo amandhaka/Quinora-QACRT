@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity(name = "question")
@@ -33,7 +34,15 @@ public class Question {
     private Date createdAt;
 
     private String username;
-    private String category;
+    //private String category;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "question_category",
+            joinColumns = { @JoinColumn(name = "questionId") },
+            inverseJoinColumns = { @JoinColumn(name = "categoryId") }
+    )
+    private Set<Category> categorySet;
 
     @Column(columnDefinition = "boolean default true")
     @NotNull

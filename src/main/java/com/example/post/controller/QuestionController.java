@@ -35,11 +35,11 @@ public class QuestionController {
         return questionService.editQuestion(username, questionId, questionRequestDto);
     }
 
-    @CrossOrigin
-    @GetMapping("/{category}")
-    List<QuestionResponseDto> questionListByCategory(@PathVariable("category") String category) {
-        return questionService.questionListByCategory(category);
-    }
+//    @CrossOrigin
+//    @GetMapping("/{category}")
+//    List<QuestionResponseDto> questionListByCategory(@PathVariable("category") String category) {
+//        return questionService.questionListByCategory(category);
+//    }
 
     @CrossOrigin
     @GetMapping("/all/{username}")

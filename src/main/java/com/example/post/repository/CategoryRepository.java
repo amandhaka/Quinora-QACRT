@@ -5,12 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Repository
 public interface CategoryRepository  extends JpaRepository<Category, Long> {
+    List<Category> findCategoryIn(HashSet<Category> categorySet);
 
-    String queryToFetchCategoryNames = "SELECT category.category_name FROM category";
-    @Query(value = queryToFetchCategoryNames, nativeQuery = true)
-    List<String> findAllCategoryNames();
+//    String queryToFetchCategoryNames = "SELECT category.category_name FROM category";
+//    @Query(value = queryToFetchCategoryNames, nativeQuery = true)
+//    List<String> findAllCategoryNames();
 }
