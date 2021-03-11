@@ -21,4 +21,5 @@ public interface AnswerService {
 
     List<AnswerResponseDTO> showAnswersAfterSort (String username, Long quid, SortAnswerPostDTO request);
 
+    Long findPoints(String username);
 }
