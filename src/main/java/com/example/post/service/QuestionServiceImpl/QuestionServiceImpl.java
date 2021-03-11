@@ -1,6 +1,7 @@
 package com.example.post.service.QuestionServiceImpl;
 
 
+import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import com.example.post.dto.CategoryResponseDto;
 import com.example.post.dto.QuestionRequestDto;
 import com.example.post.dto.QuestionResponseDto;
@@ -125,6 +126,17 @@ public class QuestionServiceImpl implements QuestionService {
             questionFromDb.setStatus(false);
             BeanUtils.copyProperties(questionFromDb, questionResponseDto);
             questionRepository.save(questionFromDb);
+            return questionResponseDto;
+        }
+        return null;
+    }
+
+    @Override
+    public QuestionResponseDto questionByQuestionId(Long questionId) {
+        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+        Optional<Question> question = questionRepository.findById(questionId);
+        if(question.isPresent()){
+            BeanUtils.copyProperties(question.get(),questionResponseDto);
             return questionResponseDto;
         }
         return null;

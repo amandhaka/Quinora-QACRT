@@ -7,6 +7,7 @@ import com.example.post.dto.SortAnswerPostDTO;
 import com.example.post.entity.Answer;
 import com.example.post.entity.Comment;
 import com.example.post.repository.AnswerRepository;
+import com.example.post.repository.QuestionRepository;
 import com.example.post.repository.ReactionRepository;
 import com.example.post.repository.commentRepository;
 import com.example.post.service.AnswerService;
@@ -27,6 +28,9 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Autowired
     private ReactionRepository reactionRepository;
+
+    @Autowired
+    private QuestionRepository questionRepository;
 
     public String postAnswer (String username, Long quid, AnswerRequestDTO request){
 
@@ -62,6 +66,8 @@ public class AnswerServiceImpl implements AnswerService {
             System.out.println(comments);
             answerResponseDTO.setLikes(reactionRepository.getLikesAndDislikes(answer.getId(), true));
             answerResponseDTO.setDislikes(reactionRepository.getLikesAndDislikes(answer.getId(), false));
+            answerResponseDTO.setQtext(questionRepository.findById(quid).get().getQuestionText());
+            answerResponseDTO.setQtitle(questionRepository.findById(quid).get().getQuestionTitle());
             answerResponseDTO.setCommentList(comments);
             System.out.println(answerResponseDTO);
             toReturn.add(answerResponseDTO);

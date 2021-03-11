@@ -25,5 +25,7 @@ public interface QuestionService {
     List<QuestionResponseDto> questionListByCategory(String category);
 
     QuestionResponseDto disableQuestionById(String username, Long questionId);
+
+    QuestionResponseDto questionByQuestionId(Long questionId);
 }
 

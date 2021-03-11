@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/reaction")
 
 public class ReactionController {
@@ -19,8 +20,8 @@ public class ReactionController {
         return reactionService.createReaction(username, reactionRequestDto);
     }
 
-    @GetMapping("/{username}/{answer_id}")
-    public Long[] getLikesAndDislikes(@PathVariable("username") String username, @PathVariable("answer_id") Long answer_id) {
-        return reactionService.getLikesAndDislikes(username, answer_id);
-    }
+//    @GetMapping("/{username}/{answer_id}")
+//    public Long[] getLikesAndDislikes(@PathVariable("username") String username, @PathVariable("answer_id") Long answer_id) {
+//        return reactionService.getLikesAndDislikes(username, answer_id);
+//    }
 }

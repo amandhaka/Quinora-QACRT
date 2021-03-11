@@ -50,13 +50,13 @@ public class ReactionServiceImpl implements ReactionService {
         return reactionResponseDTO;
     }
 
-    @Override
-    public Long[] getLikesAndDislikes(String username, Long answer_id) {
-        Long[] countOfLikesAndDislikes = new Long[2];
-        countOfLikesAndDislikes[0] = reactionRepository.getLikesAndDislikes(answer_id,true);
-        countOfLikesAndDislikes[1] = reactionRepository.getLikesAndDislikes(answer_id,false);
-
-        return countOfLikesAndDislikes;
-    }
+//    @Override
+//    public Long[] getLikesAndDislikes(String username, Long answer_id) {
+//        Long[] countOfLikesAndDislikes = new Long[2];
+//        countOfLikesAndDislikes[0] = reactionRepository.getLikesAndDislikes(answer_id,true);
+//        countOfLikesAndDislikes[1] = reactionRepository.getLikesAndDislikes(answer_id,false);
+//
+//        return countOfLikesAndDislikes;
+//    }
 
 }

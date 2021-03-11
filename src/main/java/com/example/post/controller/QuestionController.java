@@ -5,6 +5,7 @@ import com.example.post.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Path;
 import java.util.List;
 
 @RestController
@@ -54,6 +55,11 @@ public class QuestionController {
     @PutMapping("/{username}/disable/{questionId}")
     QuestionResponseDto disableQuestionById(@PathVariable("username") String username, @PathVariable("questionId") Long questionId) {
         return questionService.disableQuestionById(username, questionId);
+    }
+    @CrossOrigin
+    @GetMapping("/question-id/{questionId}")
+    QuestionResponseDto questionByQuestionId(@PathVariable("questionId") Long questionId) {
+        return questionService.questionByQuestionId(questionId);
     }
 
 

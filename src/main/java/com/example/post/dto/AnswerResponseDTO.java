@@ -2,6 +2,7 @@ package com.example.post.dto;
 
 import com.example.post.entity.Comment;
 import lombok.Data;
+import sun.swing.StringUIClientPropertyKey;
 
 import java.util.Date;
 import java.util.List;
@@ -14,10 +15,11 @@ public class AnswerResponseDTO {
     private Boolean status;
     private Date timeStamp;
     private String imgsrc;
-    //private Long multimediaId;
     private String answerText;
     private List<Comment> commentList;
     private Long likes;
     private Long dislikes;
+    private String qtext;
+    private String qtitle;
 
 }
