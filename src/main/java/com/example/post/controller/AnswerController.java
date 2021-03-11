@@ -42,4 +42,11 @@ public class AnswerController {
         return answerService.showAnswersAfterSort(username, qid, request) ;
     }
 
+    @GetMapping(path = "/points")
+    public Long findPoints(@RequestParam("username") String username) {
+        return answerService.findPoints(username);
+    }
+
+
+
 }

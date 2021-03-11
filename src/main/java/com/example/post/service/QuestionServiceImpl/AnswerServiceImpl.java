@@ -1,10 +1,8 @@
 package com.example.post.service.QuestionServiceImpl;
 
-import com.example.post.dto.AnswerRequestDTO;
-import com.example.post.dto.AnswerRequestIdDTO;
-import com.example.post.dto.AnswerResponseDTO;
-import com.example.post.dto.SortAnswerPostDTO;
+import com.example.post.dto.*;
 import com.example.post.entity.Answer;
+import com.example.post.entity.AnswerReaction;
 import com.example.post.entity.Comment;
 import com.example.post.entity.Notification;
 import com.example.post.repository.AnswerRepository;
@@ -28,9 +26,8 @@ public class AnswerServiceImpl implements AnswerService {
     commentRepository commentRepository;
     @Autowired
     NotificationRepository notificationRepository;
-
     @Autowired
-    private ReactionRepository reactionRepository;
+    ReactionRepository reactionRepository;
 
     public String postAnswer (String username, Long quid, AnswerRequestDTO request){
 
@@ -154,5 +151,14 @@ public class AnswerServiceImpl implements AnswerService {
 
     }
 
+    @Override
+    public Long findPoints(String username) {
+        Long numberOfLikes = reactionRepository.findNumberOfLikes(username);
+        Long numberOfDislikes = reactionRepository.findNumberOfDislikes(username);
+        Long numberOfAnswers = answerRepository.findAnswerCount(username);
+        Long points = (numberOfLikes-numberOfDislikes)/numberOfAnswers;
+
+        return points;
+    }
 
 }
