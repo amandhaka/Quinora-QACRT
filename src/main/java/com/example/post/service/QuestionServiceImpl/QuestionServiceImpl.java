@@ -8,6 +8,7 @@ import com.example.post.entity.Category;
 import com.example.post.entity.Question;
 import com.example.post.repository.CategoryRepository;
 import com.example.post.repository.QuestionRepository;
+import com.example.post.service.ProducerService;
 import com.example.post.service.QuestionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProducerService producerService;
 
     @Override
     public List<QuestionResponseDto> getAllQuestions() {
@@ -50,8 +54,10 @@ public class QuestionServiceImpl implements QuestionService {
         Question question = new Question();
         BeanUtils.copyProperties(questionRequestDto, question);
         question.setUsername(username);
+
         Question savedQuestion = questionRepository.save(question);
         BeanUtils.copyProperties(savedQuestion, questionResponseDto);
+        producerService.sendMessageToSearchAfterUpdate(savedQuestion);
         return questionResponseDto;
     }
 
@@ -67,7 +73,8 @@ public class QuestionServiceImpl implements QuestionService {
             question.setQuestionText(questionRequestDto.getQuestionText());
             question.setCategory(questionRequestDto.getCategory());;
             BeanUtils.copyProperties(question, questionResponseDto);
-            questionRepository.save(question);
+            Question savedQuestion=questionRepository.save(question);
+            producerService.sendMessageToSearchAfterUpdate(savedQuestion);
             return questionResponseDto;
         }
         return null;

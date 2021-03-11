@@ -10,6 +10,7 @@ import com.example.post.repository.NotificationRepository;
 import com.example.post.repository.ReactionRepository;
 import com.example.post.repository.commentRepository;
 import com.example.post.service.AnswerService;
+import com.example.post.service.ProducerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ import java.util.*;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
+    @Autowired
+    private ProducerService producerService;
 
     @Autowired
     AnswerRepository answerRepository;
@@ -45,7 +48,8 @@ public class AnswerServiceImpl implements AnswerService {
 
 //        Map<String, Long> multimediaClientIdsMap = multimediaClient.getIds(request);
 //        answerToSave.setImageID(multimediaClientIdsMap.get(imageId));
-        answerRepository.save(answerToSave);
+        Answer savedAnswer = answerRepository.save(answerToSave);
+        producerService.sendMessageToSearchAfterAnswerUpdate(savedAnswer);
 
 
         return (answerToSave.getUserName()+"Posted an answer!");
@@ -87,7 +91,8 @@ public class AnswerServiceImpl implements AnswerService {
             if (request.getImgsrc() != "") {
                 answer.setImgsrc(request.getImgsrc());
             }
-            answerRepository.save(answer);
+            Answer savedAnswer=answerRepository.save(answer);
+            producerService.sendMessageToSearchAfterAnswerUpdate(savedAnswer);
             return (username + "edited their answer");
         }
 
