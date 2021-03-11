@@ -12,6 +12,5 @@ public interface NotificationRepository extends CrudRepository<Notification, Lon
 
     @Query(value = queryToViewNotification, nativeQuery = true)
     List<Notification> getNotificationByUsername(String username);
-
     List<Notification> findByQuestionId(Long quid);
 }
