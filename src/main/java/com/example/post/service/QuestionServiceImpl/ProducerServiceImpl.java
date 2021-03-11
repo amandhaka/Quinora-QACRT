@@ -45,6 +45,7 @@ public class ProducerServiceImpl implements ProducerService {
         try{
             string = objectMapper.writeValueAsString(answer);
         }
+        //catch exception
         catch (Exception e)
         {
             e.printStackTrace();
