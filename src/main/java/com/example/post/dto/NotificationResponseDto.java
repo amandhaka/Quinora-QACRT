@@ -15,4 +15,6 @@ public class NotificationResponseDto {
 
     private Long answerId;
 
+    private boolean isRead;
+
 }
