@@ -39,4 +39,7 @@ public class Question {
     @NotNull
     private boolean status;
 
+    @Column(columnDefinition = "TEXT")
+    private String questionImage;
+
 }

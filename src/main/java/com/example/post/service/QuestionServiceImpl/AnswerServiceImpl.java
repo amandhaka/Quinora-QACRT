@@ -45,13 +45,8 @@ public class AnswerServiceImpl implements AnswerService {
         answerToSave.setTimeStamp(timeStamp);
         answerToSave.setImgsrc(request.getImgsrc());
         answerToSave.setStatus(true);
-
-//        Map<String, Long> multimediaClientIdsMap = multimediaClient.getIds(request);
-//        answerToSave.setImageID(multimediaClientIdsMap.get(imageId));
         Answer savedAnswer = answerRepository.save(answerToSave);
         producerService.sendMessageToSearchAfterAnswerUpdate(savedAnswer);
-
-
         return (answerToSave.getUserName()+"Posted an answer!");
 
     }
@@ -69,18 +64,10 @@ public class AnswerServiceImpl implements AnswerService {
             answerResponseDTO.setDislikes(reactionRepository.getLikesAndDislikes(answer.getId(), false));
             answerResponseDTO.setCommentList(comments);
             System.out.println(answerResponseDTO);
-            List<Notification> notificationList = notificationRepository.findByQuestionId(quid);
-            for(Notification notification: notificationList) {
-                notification.setRead(false);
-                notificationRepository.save(notification);
-            }
             toReturn.add(answerResponseDTO);
 
         });
-
             return toReturn;
-
-
     }
 
     public String updateAnswer (String username, Long quid, AnswerRequestIdDTO request){
@@ -104,15 +91,19 @@ public class AnswerServiceImpl implements AnswerService {
 
     public String deleteAnswerFromUI (String username, Long quid, AnswerRequestIdDTO request){
         Optional<Answer> answerFromDb = answerRepository.findById(request.getAnswerId());
+        AnswerStatus answerStatus = new AnswerStatus();
         if (answerFromDb.isPresent()){
             Answer answer = answerFromDb.get();
             answer.setStatus(false);
+            answerRepository.save(answer);
+            answerStatus.setStatus(false);
+            answerStatus.setId(request.getAnswerId());
+            answerStatus.setQuestionID(quid);
+            producerService.updateAnswerSearch(answerStatus);
             return ("Answer has been deleted!");
 
         }
-
         return null;
-
     }
 
     public List<AnswerResponseDTO> showAnswersAfterSort (String username, Long quid, SortAnswerPostDTO request){

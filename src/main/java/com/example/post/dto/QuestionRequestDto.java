@@ -13,4 +13,5 @@ public class QuestionRequestDto {
     private Date createdAt;
     private String category;
     private boolean status;
+    private String questionImage;
 }

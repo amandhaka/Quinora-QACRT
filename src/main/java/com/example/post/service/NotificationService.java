@@ -9,4 +9,6 @@ public interface NotificationService {
     public String addNotification(NotificationRequestDto notificationRequestDto);
 
     List<NotificationResponseDto> viewNotification(String username);
+
+    String sawNotification(Long notificationId);
 }

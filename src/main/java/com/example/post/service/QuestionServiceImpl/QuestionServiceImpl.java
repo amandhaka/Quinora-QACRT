@@ -4,6 +4,7 @@ package com.example.post.service.QuestionServiceImpl;
 import com.example.post.dto.CategoryResponseDto;
 import com.example.post.dto.QuestionRequestDto;
 import com.example.post.dto.QuestionResponseDto;
+import com.example.post.dto.QuestionStatus;
 import com.example.post.entity.Category;
 import com.example.post.entity.Question;
 import com.example.post.repository.CategoryRepository;
@@ -127,11 +128,27 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionResponseDto disableQuestionById(String username, Long questionId) {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
         if(optionalQuestion.isPresent()) {
+            //
+            QuestionStatus questionStatus = new QuestionStatus();
+            questionStatus.setQuestionId(questionId);
+            //
             QuestionResponseDto questionResponseDto = new QuestionResponseDto();
             Question questionFromDb = optionalQuestion.get();
             questionFromDb.setStatus(false);
             BeanUtils.copyProperties(questionFromDb, questionResponseDto);
             questionRepository.save(questionFromDb);
+            questionStatus.setStatus(false);
+            producerService.updateQuestion(questionStatus);
+            return questionResponseDto;
+        }
+        return null;
+    }
+    @Override
+    public QuestionResponseDto questionByQuestionId(Long questionId) {
+        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+        Optional<Question> question = questionRepository.findById(questionId);
+        if(question.isPresent()){
+            BeanUtils.copyProperties(question.get(),questionResponseDto);
             return questionResponseDto;
         }
         return null;

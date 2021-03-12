@@ -55,6 +55,9 @@ public class QuestionController {
     QuestionResponseDto disableQuestionById(@PathVariable("username") String username, @PathVariable("questionId") Long questionId) {
         return questionService.disableQuestionById(username, questionId);
     }
-
-
+    @CrossOrigin
+    @GetMapping("/question-id/{questionId}")
+    QuestionResponseDto questionByQuestionId(@PathVariable("questionId") Long questionId) {
+        return questionService.questionByQuestionId(questionId);
+    }
 }
