@@ -16,4 +16,5 @@ public class QuestionResponseDto {
     private String username;
     private String category;
     private boolean status;
+    private String questionImage;
 }

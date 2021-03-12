@@ -136,4 +136,14 @@ public class QuestionServiceImpl implements QuestionService {
         }
         return null;
     }
+    @Override
+    public QuestionResponseDto questionByQuestionId(Long questionId) {
+        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+        Optional<Question> question = questionRepository.findById(questionId);
+        if(question.isPresent()){
+            BeanUtils.copyProperties(question.get(),questionResponseDto);
+            return questionResponseDto;
+        }
+        return null;
+    }
 }

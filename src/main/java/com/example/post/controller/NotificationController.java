@@ -26,4 +26,8 @@ public class NotificationController {
     public List<NotificationResponseDto> viewNotification(@PathVariable("username") String username){
         return notificationService.viewNotification(username);
     }
+    @PutMapping("/updateNotification/{notificationId}")
+    public String sawNotification(@PathVariable("notificationId") Long notificationId) {
+        return notificationService.sawNotification(notificationId);
+    }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
@@ -44,5 +45,12 @@ public class NotificationServiceImpl implements NotificationService {
             return notificationResponseDtoList;
         }
         return null;
+    }
+    @Override
+    public String sawNotification(Long notificationId) {
+        Optional<Notification> notification = notificationRepository.findById(notificationId);
+        notification.get().setRead(false);
+        notificationRepository.save(notification.get());
+        return "success";
     }
 }
