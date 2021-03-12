@@ -103,9 +103,7 @@ public class AnswerServiceImpl implements AnswerService {
             return ("Answer has been deleted!");
 
         }
-
         return null;
-
     }
 
     public List<AnswerResponseDTO> showAnswersAfterSort (String username, Long quid, SortAnswerPostDTO request){
