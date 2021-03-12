@@ -47,6 +47,4 @@ public class AnswerController {
         return answerService.findPoints(username);
     }
 
-
-
 }
