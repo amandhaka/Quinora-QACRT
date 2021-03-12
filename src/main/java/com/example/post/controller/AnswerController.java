@@ -32,7 +32,7 @@ public class AnswerController {
         return answerService.updateAnswer(username, quid, request);
     }
 
-    @DeleteMapping( path = "{username}/{quid}")
+    @PutMapping( path = "{username}/{quid}/delete")
     public String deleteAnswerFromUI(@PathVariable("quid") Long quid, @PathVariable("username") String username, @RequestBody AnswerRequestIdDTO request){
         return answerService.deleteAnswerFromUI(username, quid, request);
     }
