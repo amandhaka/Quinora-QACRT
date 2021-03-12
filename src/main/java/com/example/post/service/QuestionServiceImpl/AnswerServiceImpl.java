@@ -45,13 +45,8 @@ public class AnswerServiceImpl implements AnswerService {
         answerToSave.setTimeStamp(timeStamp);
         answerToSave.setImgsrc(request.getImgsrc());
         answerToSave.setStatus(true);
-
-//        Map<String, Long> multimediaClientIdsMap = multimediaClient.getIds(request);
-//        answerToSave.setImageID(multimediaClientIdsMap.get(imageId));
         Answer savedAnswer = answerRepository.save(answerToSave);
         producerService.sendMessageToSearchAfterAnswerUpdate(savedAnswer);
-
-
         return (answerToSave.getUserName()+"Posted an answer!");
 
     }
@@ -96,10 +91,15 @@ public class AnswerServiceImpl implements AnswerService {
 
     public String deleteAnswerFromUI (String username, Long quid, AnswerRequestIdDTO request){
         Optional<Answer> answerFromDb = answerRepository.findById(request.getAnswerId());
+        AnswerStatus answerStatus = new AnswerStatus();
         if (answerFromDb.isPresent()){
             Answer answer = answerFromDb.get();
             answer.setStatus(false);
             answerRepository.save(answer);
+            answerStatus.setStatus(false);
+            answerStatus.setId(request.getAnswerId());
+            answerStatus.setQuestionID(quid);
+            producerService.updateAnswerSearch(answerStatus);
             return ("Answer has been deleted!");
 
         }
