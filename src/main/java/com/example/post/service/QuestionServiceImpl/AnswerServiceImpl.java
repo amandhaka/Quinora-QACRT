@@ -64,18 +64,10 @@ public class AnswerServiceImpl implements AnswerService {
             answerResponseDTO.setDislikes(reactionRepository.getLikesAndDislikes(answer.getId(), false));
             answerResponseDTO.setCommentList(comments);
             System.out.println(answerResponseDTO);
-            List<Notification> notificationList = notificationRepository.findByQuestionId(quid);
-            for(Notification notification: notificationList) {
-                notification.setRead(false);
-                notificationRepository.save(notification);
-            }
             toReturn.add(answerResponseDTO);
 
         });
-
             return toReturn;
-
-
     }
 
     public String updateAnswer (String username, Long quid, AnswerRequestIdDTO request){
