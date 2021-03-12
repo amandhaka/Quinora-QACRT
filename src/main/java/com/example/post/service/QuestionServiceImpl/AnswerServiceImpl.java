@@ -45,13 +45,8 @@ public class AnswerServiceImpl implements AnswerService {
         answerToSave.setTimeStamp(timeStamp);
         answerToSave.setImgsrc(request.getImgsrc());
         answerToSave.setStatus(true);
-
-//        Map<String, Long> multimediaClientIdsMap = multimediaClient.getIds(request);
-//        answerToSave.setImageID(multimediaClientIdsMap.get(imageId));
         Answer savedAnswer = answerRepository.save(answerToSave);
         producerService.sendMessageToSearchAfterAnswerUpdate(savedAnswer);
-
-
         return (answerToSave.getUserName()+"Posted an answer!");
 
     }
