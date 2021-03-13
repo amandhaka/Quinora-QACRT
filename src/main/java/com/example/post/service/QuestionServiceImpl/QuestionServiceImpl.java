@@ -87,9 +87,11 @@ public class QuestionServiceImpl implements QuestionService {
         List<Question> questionList = questionRepository.findByCategory(category);
         if(!questionList.isEmpty()){
             for(Question question: questionList) {
-                QuestionResponseDto questionResponseDto = new QuestionResponseDto();
-                BeanUtils.copyProperties(question, questionResponseDto);
-                responseDtoList.add(questionResponseDto);
+                if(question.isStatus()) {
+                    QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+                    BeanUtils.copyProperties(question, questionResponseDto);
+                    responseDtoList.add(questionResponseDto);
+                }
             }
             return responseDtoList;
         }
@@ -102,9 +104,11 @@ public class QuestionServiceImpl implements QuestionService {
         List<Question> questionList = questionRepository.findByUsername(username);
         if(questionList.size()!=0) {
             for (Question question : questionList) {
-                QuestionResponseDto questionResponseDto = new QuestionResponseDto();
-                BeanUtils.copyProperties(question, questionResponseDto);
-                questionResponseDtoList.add(questionResponseDto);
+                if(question.isStatus()) {
+                    QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+                    BeanUtils.copyProperties(question, questionResponseDto);
+                    questionResponseDtoList.add(questionResponseDto);
+                }
             }
             return questionResponseDtoList;
         }
@@ -147,7 +151,7 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionResponseDto questionByQuestionId(Long questionId) {
         QuestionResponseDto questionResponseDto = new QuestionResponseDto();
         Optional<Question> question = questionRepository.findById(questionId);
-        if(question.isPresent()){
+        if(question.isPresent() && question.get().isStatus()){
             BeanUtils.copyProperties(question.get(),questionResponseDto);
             return questionResponseDto;
         }

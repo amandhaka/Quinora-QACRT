@@ -20,6 +20,6 @@ public class Notification {
 
     private Long answerId;
 
-    @Column(columnDefinition = "boolean default true")
-    private boolean isRead;
+    @Column(nullable = false)
+    private boolean isRead = true;
 }

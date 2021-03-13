@@ -53,4 +53,10 @@ public class NotificationServiceImpl implements NotificationService {
         notificationRepository.save(notification.get());
         return "success";
     }
+
+    @Override
+    public Long newNotificationCount(String username) {
+        Long notificationCount = notificationRepository.getNoticiationCount(username);
+        return notificationCount;
+    }
 }

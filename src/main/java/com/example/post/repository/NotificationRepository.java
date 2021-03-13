@@ -13,4 +13,9 @@ public interface NotificationRepository extends CrudRepository<Notification, Lon
     @Query(value = queryToViewNotification, nativeQuery = true)
     List<Notification> getNotificationByUsername(String username);
     List<Notification> findByQuestionId(Long quid);
+
+    String queryForNotificationCount = "select count(*) from notification n where n.question_id in (select q.question_id from question q full join notification n1 on q.question_id = n1.question_id where q.username = ?1)  AND n.is_read = true";
+
+    @Query(value = queryForNotificationCount, nativeQuery = true)
+    Long getNoticiationCount( String username) ;
 }

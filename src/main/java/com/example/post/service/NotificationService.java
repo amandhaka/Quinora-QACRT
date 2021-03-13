@@ -11,4 +11,6 @@ public interface NotificationService {
     List<NotificationResponseDto> viewNotification(String username);
 
     String sawNotification(Long notificationId);
+
+    Long newNotificationCount(String username);
 }
