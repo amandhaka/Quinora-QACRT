@@ -11,6 +11,7 @@ import com.example.post.repository.ReactionRepository;
 import com.example.post.repository.commentRepository;
 import com.example.post.service.AnswerService;
 import com.example.post.service.ProducerService;
+import com.google.common.util.concurrent.ExecutionError;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -127,13 +128,16 @@ public class AnswerServiceImpl implements AnswerService {
 
         if (request.getParameter().equals("byDislikes")){
 
-            Collections.sort(toReturn, (AnswerResponseDTO a1, AnswerResponseDTO a2) -> a1.getLikes().compareTo(a2.getLikes()));
+            Collections.sort(toReturn, Comparator.comparing(s -> s.getDislikes())) ;
+            Collections.reverse(toReturn);
 
         }
 
         else if (request.getParameter().equals("byLikes")){
 
-            Collections.sort(toReturn, (AnswerResponseDTO a1, AnswerResponseDTO a2) -> a1.getDislikes().compareTo(a2.getDislikes()));
+            //Collections.sort(toReturn, (AnswerResponseDTO a1, AnswerResponseDTO a2) -> a1.getDislikes().compareTo(a2.getDislikes()));
+            Collections.sort(toReturn, Comparator.comparing(s -> s.getLikes()));
+            Collections.reverse(toReturn);
 
         }
 
@@ -152,7 +156,12 @@ public class AnswerServiceImpl implements AnswerService {
         Long numberOfLikes = reactionRepository.findNumberOfLikes(username);
         Long numberOfDislikes = reactionRepository.findNumberOfDislikes(username);
         Long numberOfAnswers = answerRepository.findAnswerCount(username);
-        Long points = (numberOfLikes-numberOfDislikes)/numberOfAnswers;
+        Long points = new Long(0);
+        try {
+            points = (numberOfLikes-numberOfDislikes)/numberOfAnswers;
+        } catch(Exception ex ){
+            points = new Long(0);
+        }
 
         return points;
     }
