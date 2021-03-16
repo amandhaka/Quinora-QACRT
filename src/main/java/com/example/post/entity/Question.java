@@ -24,7 +24,7 @@ public class Question {
     private String questionTitle;
 
     @NotBlank
-    @Size(min = 30, max = 400)
+    @Column(columnDefinition = "TEXT")
     private String questionText;
 
 

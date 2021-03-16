@@ -6,10 +6,7 @@ import lombok.Data;
 import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
@@ -25,9 +22,11 @@ public class Answer {
     private String userName;
     private Boolean status;
     private Date timeStamp;
+    @Column(columnDefinition = "TEXT")
     private String imgsrc;
     //private Long multimediaId;
     @NotBlank
+    @Column(columnDefinition = "TEXT")
     private String answerText;
 
 }

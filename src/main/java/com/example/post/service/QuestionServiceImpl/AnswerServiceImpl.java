@@ -152,8 +152,14 @@ public class AnswerServiceImpl implements AnswerService {
         Long numberOfLikes = reactionRepository.findNumberOfLikes(username);
         Long numberOfDislikes = reactionRepository.findNumberOfDislikes(username);
         Long numberOfAnswers = answerRepository.findAnswerCount(username);
-        Long points = (numberOfLikes-numberOfDislikes)/numberOfAnswers;
-
+        Long points;
+        try {
+            points = (numberOfLikes - numberOfDislikes) / numberOfAnswers;
+        }
+        catch (Exception e)
+        {
+            points = new Long(0);
+        }
         return points;
     }
 

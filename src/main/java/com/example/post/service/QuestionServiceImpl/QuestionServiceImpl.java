@@ -87,9 +87,11 @@ public class QuestionServiceImpl implements QuestionService {
         List<Question> questionList = questionRepository.findByCategory(category);
         if(!questionList.isEmpty()){
             for(Question question: questionList) {
-                QuestionResponseDto questionResponseDto = new QuestionResponseDto();
-                BeanUtils.copyProperties(question, questionResponseDto);
-                responseDtoList.add(questionResponseDto);
+                if(question.isStatus()) {
+                    QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+                    BeanUtils.copyProperties(question, questionResponseDto);
+                    responseDtoList.add(questionResponseDto);
+                }
             }
             return responseDtoList;
         }
