@@ -1,6 +1,5 @@
-package com.example.post.service.QuestionServiceImpl;
+package com.example.post.service.impl;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import com.example.post.dto.CategoryResponseDto;
 import com.example.post.entity.Category;
 import com.example.post.repository.CategoryRepository;

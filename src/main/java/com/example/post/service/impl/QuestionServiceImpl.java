@@ -1,11 +1,9 @@
-package com.example.post.service.QuestionServiceImpl;
+package com.example.post.service.impl;
 
 
-import com.example.post.dto.CategoryResponseDto;
 import com.example.post.dto.QuestionRequestDto;
 import com.example.post.dto.QuestionResponseDto;
 import com.example.post.dto.QuestionStatus;
-import com.example.post.entity.Category;
 import com.example.post.entity.Question;
 import com.example.post.repository.CategoryRepository;
 import com.example.post.repository.QuestionRepository;
@@ -13,14 +11,10 @@ import com.example.post.service.ProducerService;
 import com.example.post.service.QuestionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service

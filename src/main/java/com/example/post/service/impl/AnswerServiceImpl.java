@@ -1,17 +1,14 @@
-package com.example.post.service.QuestionServiceImpl;
+package com.example.post.service.impl;
 
 import com.example.post.dto.*;
 import com.example.post.entity.Answer;
-import com.example.post.entity.AnswerReaction;
 import com.example.post.entity.Comment;
-import com.example.post.entity.Notification;
 import com.example.post.repository.AnswerRepository;
 import com.example.post.repository.NotificationRepository;
 import com.example.post.repository.ReactionRepository;
 import com.example.post.repository.commentRepository;
 import com.example.post.service.AnswerService;
 import com.example.post.service.ProducerService;
-import com.google.common.util.concurrent.ExecutionError;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,19 +31,24 @@ public class AnswerServiceImpl implements AnswerService {
     ReactionRepository reactionRepository;
 
     public String postAnswer (String username, Long quid, AnswerRequestDTO request){
-        java.util.Date date = new java.util.Date();
-        java.sql.Date timeStamp = new java.sql.Date(date.getTime());
+        try {
+            java.util.Date date = new java.util.Date();
 
-        Answer answerToSave = new Answer();
-        answerToSave.setAnswerText(request.getAnswerText());
-        answerToSave.setUserName(username);
-        answerToSave.setQuestionID(quid);
-        answerToSave.setTimeStamp(timeStamp);
-        answerToSave.setImgsrc(request.getImgsrc());
-        answerToSave.setStatus(true);
-        Answer savedAnswer = answerRepository.save(answerToSave);
-        producerService.sendMessageToSearchAfterAnswerUpdate(savedAnswer);
-        return (answerToSave.getUserName()+"Posted an answer!");
+            java.sql.Date timeStamp = new java.sql.Date(date.getTime());
+
+            Answer answerToSave = new Answer();
+            answerToSave.setAnswerText(request.getAnswerText());
+            answerToSave.setUserName(username);
+            answerToSave.setQuestionID(quid);
+            answerToSave.setTimeStamp(timeStamp);
+            answerToSave.setImgsrc(request.getImgsrc());
+            answerToSave.setStatus(true);
+            Answer savedAnswer = answerRepository.save(answerToSave);
+            //producerService.sendMessageToSearchAfterAnswerUpdate(savedAnswer);
+            return (answerToSave.getUserName() + "Posted an answer!");
+        } catch ( NullPointerException ex ){
+            return null;
+        }
 
     }
 
@@ -81,26 +83,29 @@ public class AnswerServiceImpl implements AnswerService {
             producerService.sendMessageToSearchAfterAnswerUpdate(savedAnswer);
             return (username + "edited their answer");
         }
-
         return null;
-
-
     }
 
 
     public String deleteAnswerFromUI (String username, Long quid, AnswerRequestIdDTO request){
-        Optional<Answer> answerFromDb = answerRepository.findById(request.getAnswerId());
-        AnswerStatus answerStatus = new AnswerStatus();
-        if (answerFromDb.isPresent()){
-            Answer answer = answerFromDb.get();
-            answer.setStatus(false);
-            answerRepository.save(answer);
-            answerStatus.setStatus(false);
-            answerStatus.setId(request.getAnswerId());
-            answerStatus.setQuestionID(quid);
-            producerService.updateAnswerSearch(answerStatus);
-            return ("Answer has been deleted!");
 
+        try {
+            Optional<Answer> answerFromDb = answerRepository.findById(request.getAnswerId());
+
+            AnswerStatus answerStatus = new AnswerStatus();
+            if (answerFromDb.isPresent()) {
+                Answer answer = answerFromDb.get();
+                answer.setStatus(false);
+                answerRepository.save(answer);
+                answerStatus.setStatus(false);
+                answerStatus.setId(request.getAnswerId());
+                answerStatus.setQuestionID(quid);
+                // producerService.updateAnswerSearch(answerStatus);
+                return ("Answer has been deleted!");
+
+            }
+        } catch ( NullPointerException ex ){
+            return "";
         }
         return null;
     }

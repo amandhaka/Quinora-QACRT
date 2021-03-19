@@ -1,4 +1,4 @@
-package com.example.post.service.QuestionServiceImpl;
+package com.example.post.service.impl;
 
 import com.example.post.dto.QuestionRequestDto;
 import com.example.post.dto.QuestionResponseDto;
@@ -6,7 +6,6 @@ import com.example.post.entity.Category;
 import com.example.post.entity.Question;
 import com.example.post.repository.CategoryRepository;
 import com.example.post.repository.QuestionRepository;
-import com.example.post.service.QuestionServiceImpl.QuestionServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,13 +19,11 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.constraints.Null;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,6 +35,9 @@ class QuestionServiceTest {
 
     @InjectMocks
     private QuestionServiceImpl questionService;
+
+    @InjectMocks
+    private CategoryServiceImpl categoryService;
 
     @Mock
     private QuestionRepository questionRepository;
@@ -271,6 +271,17 @@ class QuestionServiceTest {
         assertEquals(questionService.disableQuestionById("aman",1l).getCategory(),questionResponseDto.getCategory());
         Mockito.when(questionRepository.findById(1l)).thenThrow(NullPointerException.class);
         assertEquals(questionService.disableQuestionById("aman",1l),null);
+    }
+
+    @Test
+    public void findAllCategory() {
+        List<Category> categoryList = new ArrayList<>();
+        Category category = new Category();
+        category.setCategoryId(1l);
+        category.setCategoryName("Movies");
+        categoryList.add(category);
+        Mockito.when(categoryRepository.findAll()).thenReturn(categoryList);
+        assertEquals(categoryService.findAllCategory().size(), 1);
     }
 
 }

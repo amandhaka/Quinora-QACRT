@@ -1,0 +1,18 @@
+[
+    {
+        "commentId": 1,
+        "status": true,
+        "commentText": "hello",
+        "answerId": 1,
+        "userName": "preetham",
+        "timeStamp": "Fri Mar 19 12:25:45 IST 2021"
+    },
+    {
+            "commentId": 2,
+            "status": true,
+            "commentText": "hellasdfasdfsdfs",
+            "answerId": 1,
+            "userName": "akshay",
+            "timeStamp": "Fri Mar 19 12:03:12 IST 2021"
+    }
+]

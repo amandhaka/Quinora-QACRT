@@ -6,5 +6,5 @@ import com.example.post.dto.ReactionResponseDTO;
 public interface ReactionService {
     ReactionResponseDTO createReaction(String username, ReactionRequestDto reactionRequestDto);
 
-    Long[] getLikesAndDislikes(String username, Long answer_id);
+    //Long[] getLikesAndDislikes(String username, Long answer_id);
 }

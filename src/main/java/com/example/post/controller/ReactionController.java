@@ -19,8 +19,8 @@ public class ReactionController {
         return reactionService.createReaction(username, reactionRequestDto);
     }
 
-    @GetMapping("/{username}/{answer_id}")
-    public Long[] getLikesAndDislikes(@PathVariable("username") String username, @PathVariable("answer_id") Long answer_id) {
-        return reactionService.getLikesAndDislikes(username, answer_id);
-    }
+//    @GetMapping("/{username}/{answer_id}")
+//    public Long[] getLikesAndDislikes(@PathVariable("username") String username, @PathVariable("answer_id") Long answer_id) {
+//        return reactionService.getLikesAndDislikes(username, answer_id);
+//    }
 }

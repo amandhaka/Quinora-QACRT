@@ -1,4 +1,4 @@
-package com.example.post.service.QuestionServiceImpl;
+package com.example.post.service.impl;
 
 import com.example.post.dto.AnswerStatus;
 import com.example.post.dto.QuestionStatus;
@@ -6,7 +6,6 @@ import com.example.post.entity.Answer;
 import com.example.post.entity.Question;
 import com.example.post.service.ProducerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.kafka.common.protocol.types.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

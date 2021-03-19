@@ -1,0 +1,23 @@
+[
+  {
+    "notificationId": 3,
+    "usernameAnswered": "preetham",
+    "questionId": 1,
+    "answerId": 3,
+    "read": true
+  },
+  {
+    "notificationId": 4,
+    "usernameAnswered": "shikhar",
+    "questionId": 1,
+    "answerId": 3,
+    "read": true
+  },
+  {
+    "notificationId": 1,
+    "usernameAnswered": "akshay",
+    "questionId": 1,
+    "answerId": 1,
+    "read": true
+  }
+]

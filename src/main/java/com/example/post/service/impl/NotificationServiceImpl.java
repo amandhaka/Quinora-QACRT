@@ -1,4 +1,4 @@
-package com.example.post.service.QuestionServiceImpl;
+package com.example.post.service.impl;
 
 import com.example.post.dto.NotificationRequestDto;
 import com.example.post.dto.NotificationResponseDto;
@@ -6,7 +6,6 @@ import com.example.post.entity.Notification;
 import com.example.post.repository.NotificationRepository;
 import com.example.post.repository.QuestionRepository;
 import com.example.post.service.NotificationService;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +38,8 @@ public class NotificationServiceImpl implements NotificationService {
             for(Notification notification: notificationList) {
                 NotificationResponseDto responseDto = new NotificationResponseDto();
                 BeanUtils.copyProperties(notification, responseDto);
-                responseDto.setQuestionTitle(questionRepository.findById(notification.getQuestionId()).get().getQuestionTitle());
+               // responseDto.setQuestionTitle(questionRepository.findById(notification.getQuestionId()).get().getQuestionTitle());
+                responseDto.setQuestionTitle(questionRepository.findById(1l).get().getQuestionTitle());
                 notificationResponseDtoList.add(responseDto);
             }
             return notificationResponseDtoList;

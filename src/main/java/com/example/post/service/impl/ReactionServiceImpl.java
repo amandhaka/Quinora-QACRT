@@ -1,4 +1,4 @@
-package com.example.post.service.QuestionServiceImpl;
+package com.example.post.service.impl;
 
 import com.example.post.dto.ReactionRequestDto;
 import com.example.post.dto.ReactionResponseDTO;
@@ -8,8 +8,6 @@ import com.example.post.service.ReactionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ReactionServiceImpl implements ReactionService {
@@ -50,13 +48,13 @@ public class ReactionServiceImpl implements ReactionService {
         return reactionResponseDTO;
     }
 
-    @Override
-    public Long[] getLikesAndDislikes(String username, Long answer_id) {
-        Long[] countOfLikesAndDislikes = new Long[2];
-        countOfLikesAndDislikes[0] = reactionRepository.getLikesAndDislikes(answer_id,true);
-        countOfLikesAndDislikes[1] = reactionRepository.getLikesAndDislikes(answer_id,false);
-
-        return countOfLikesAndDislikes;
-    }
+//    @Override
+//    public Long[] getLikesAndDislikes(String username, Long answer_id) {
+//        Long[] countOfLikesAndDislikes = new Long[2];
+//        countOfLikesAndDislikes[0] = reactionRepository.getLikesAndDislikes(answer_id,true);
+//        countOfLikesAndDislikes[1] = reactionRepository.getLikesAndDislikes(answer_id,false);
+//
+//        return countOfLikesAndDislikes;
+//    }
 
 }
