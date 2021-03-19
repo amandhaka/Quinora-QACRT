@@ -100,7 +100,7 @@ public class AnswerServiceImpl implements AnswerService {
                 answerStatus.setStatus(false);
                 answerStatus.setId(request.getAnswerId());
                 answerStatus.setQuestionID(quid);
-                // producerService.updateAnswerSearch(answerStatus);
+                producerService.updateAnswerSearch(answerStatus);
                 return ("Answer has been deleted!");
 
             }
