@@ -38,8 +38,8 @@ public class NotificationServiceImpl implements NotificationService {
             for(Notification notification: notificationList) {
                 NotificationResponseDto responseDto = new NotificationResponseDto();
                 BeanUtils.copyProperties(notification, responseDto);
-               // responseDto.setQuestionTitle(questionRepository.findById(notification.getQuestionId()).get().getQuestionTitle());
-                responseDto.setQuestionTitle(questionRepository.findById(1l).get().getQuestionTitle());
+                responseDto.setQuestionTitle(questionRepository.findById(notification.getQuestionId()).get().getQuestionTitle());
+                //responseDto.setQuestionTitle(questionRepository.findById(1l).get().getQuestionTitle());
                 notificationResponseDtoList.add(responseDto);
             }
             return notificationResponseDtoList;
