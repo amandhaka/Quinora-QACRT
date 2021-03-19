@@ -58,17 +58,17 @@ public class QuestionServiceImpl implements QuestionService {
 
     public QuestionResponseDto createQuestion(String username,QuestionRequestDto questionRequestDto) throws Exception {
         List<String> categoryList = categoryRepository.findAllCategoryNames();
-//        if(!categoryList.contains(questionRequestDto.getCategory()))
-//            throw new Exception("Category Not Found");
+        if(!categoryList.contains(questionRequestDto.getCategory()))
+            throw new Exception("Category Not Found");
         QuestionResponseDto questionResponseDto = new QuestionResponseDto();
         Question question = new Question();
         BeanUtils.copyProperties(questionRequestDto, question);
         question.setUsername(username);
 
-//        question.setQuestionId(1l);
+        question.setQuestionId(1l);
         Question savedQuestion = questionRepository.save(question);
         BeanUtils.copyProperties(savedQuestion, questionResponseDto);
-       // producerService.sendMessageToSearchAfterUpdate(savedQuestion);
+        producerService.sendMessageToSearchAfterUpdate(savedQuestion);
 
         return questionResponseDto;
     }
@@ -84,7 +84,7 @@ public class QuestionServiceImpl implements QuestionService {
             question.setQuestionText(questionRequestDto.getQuestionText());
             question.setCategory(questionRequestDto.getCategory());;
             Question savedQuestion=questionRepository.save(question);
-           // producerService.sendMessageToSearchAfterUpdate(savedQuestion);
+            producerService.sendMessageToSearchAfterUpdate(savedQuestion);
             BeanUtils.copyProperties(savedQuestion, questionResponseDto);
             return questionResponseDto;
         }
@@ -170,7 +170,7 @@ public class QuestionServiceImpl implements QuestionService {
             BeanUtils.copyProperties(questionFromDb, questionResponseDto);
             questionRepository.save(questionFromDb);
             questionStatus.setStatus(false);
-         //   producerService.updateQuestion(questionStatus);
+            producerService.updateQuestion(questionStatus);
             return questionResponseDto;
         }
         return null;
