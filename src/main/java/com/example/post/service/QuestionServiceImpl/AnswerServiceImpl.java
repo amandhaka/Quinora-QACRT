@@ -34,8 +34,6 @@ public class AnswerServiceImpl implements AnswerService {
     ReactionRepository reactionRepository;
 
     public String postAnswer (String username, Long quid, AnswerRequestDTO request){
-
-
         java.util.Date date = new java.util.Date();
         java.sql.Date timeStamp = new java.sql.Date(date.getTime());
 
@@ -108,6 +106,7 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     public List<AnswerResponseDTO> showAnswersAfterSort (String username, Long quid, SortAnswerPostDTO request){
+
 
         List<AnswerResponseDTO> toReturn = new ArrayList<>();
         List <Answer> listOfAnswersOnQuestion = answerRepository.answersOnQuestion(quid);

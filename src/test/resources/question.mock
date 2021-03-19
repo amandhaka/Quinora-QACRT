@@ -1,0 +1,22 @@
+[
+  {
+    "questionId": 2,
+    "questionTitle": "this is question 1 Title, I have to write it more than 10 words",
+    "questionText": "Question 1 Text. I have to write it more than 30 words because of the contraint",
+    "createdAt": "2021-03-16T08:32:45.787+00:00",
+    "username": "aman",
+    "category": "Movies",
+    "status": true,
+    "questionImage": ""
+  },
+  {
+    "questionId": 3,
+    "questionTitle": "this is question 2 Title, I have to write it more than 10 words",
+    "questionText": "Question 2 Text. I have to write it more than 30 words because of the contraint",
+    "createdAt": "2021-03-16T08:32:45.787+00:00",
+    "username": "aman",
+    "category": "Movies",
+    "status": true,
+    "questionImage": ""
+  }
+]

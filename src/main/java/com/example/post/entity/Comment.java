@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity(name = "Comment")
@@ -20,11 +21,13 @@ public class Comment {
     private Date timeStamp;
     private boolean status;
     private String commentText;
+    @Column(nullable = false)
     private Long answerId;
 
 //    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "answerList")
 //    private Answer answer;
 
+    @Column(nullable = false)
     private String userName;
 }

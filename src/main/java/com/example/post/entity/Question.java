@@ -25,6 +25,7 @@ public class Question {
 
     @NotBlank
     @Size(min = 30, max = 400)
+    @Column(columnDefinition = "TEXT")
     private String questionText;
 
 
@@ -32,7 +33,11 @@ public class Question {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String category;
 
     @Column(columnDefinition = "boolean default true")

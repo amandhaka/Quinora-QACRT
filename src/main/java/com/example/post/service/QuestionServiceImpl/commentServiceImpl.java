@@ -45,6 +45,7 @@ public class commentServiceImpl implements commentService {
         //if(!answerRepository.getAnswerById(postCommentRequestDTO.getAnswerId())) throw new Exception("Answer does not exist");
 
 //        Answer theAnswer = commentRepository.getAnswerByAnswerId(postCommentRequestDTO.getAnswerId());
+
         newComment.setCommentText(postCommentRequestDTO.getText());
         newComment.setStatus(true);
         newComment.setUserName(userName);
